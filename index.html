@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>花莲・台东・台南 7日行程手册</title>
+<style>
+  :root{
+    --sunrise:#E8602E;
+    --teal:#1F6F78;
+    --gold:#C98A2B;
+    --mist:#8A8272;
+    --radius:14px;
+  }
+  :root[data-theme="light"]{
+    --bg:#EFF1EA;
+    --bg-card:#FFFFFF;
+    --bg-hero:#182436;
+    --ink:#1C2430;
+    --ink-soft:#5A6461;
+    --ink-hero:#F4F1E6;
+    --line:rgba(28,36,48,0.14);
+    --shadow:0 1px 0 rgba(28,36,48,0.06);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0D1826;
+    --bg-card:#15233A;
+    --bg-hero:#060D18;
+    --ink:#E9EEEC;
+    --ink-soft:#9FAFB8;
+    --ink-hero:#F4F1E6;
+    --line:rgba(233,238,236,0.14);
+    --shadow:0 1px 0 rgba(0,0,0,0.3);
+    --sunrise:#FF7A47;
+    --teal:#57C2CB;
+    --gold:#E3A83D;
+    --mist:#8C97A6;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei","Noto Sans CJK TC",sans-serif;
+    line-height:1.6;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    transition:background .4s ease,color .4s ease;
+  }
+  h1,h2,h3{
+    font-family:ui-serif,"Songti TC","PMingLiU","Noto Serif CJK TC",serif;
+    font-weight:600;
+    margin:0;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 18px 80px;}
+  a{color:inherit;}
+
+  /* ---- top title ---- */
+  .trip-title{
+    padding:22px 0 10px;
+    text-align:center;
+  }
+  .trip-title .en{
+    font-size:12px;
+    letter-spacing:.08em;
+    color:var(--ink-soft);
+  }
+  .trip-title h1{
+    font-size:22px;
+    margin-top:4px;
+  }
+
+  /* ---- hero countdown ---- */
+  .hero{
+    background:var(--bg-hero);
+    color:var(--ink-hero);
+    border-radius:20px;
+    padding:26px 22px 22px;
+    margin:10px 0 26px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    right:-40px;top:-60px;
+    width:180px;height:180px;
+    border-radius:50%;
+    background:radial-gradient(circle,var(--sunrise) 0%,transparent 70%);
+    opacity:.35;
+  }
+  .hero .label{
+    font-size:12px;
+    color:#C9CFCB;
+    margin-bottom:4px;
+  }
+  .hero .event-name{
+    font-size:19px;
+    font-weight:600;
+    margin-bottom:16px;
+    position:relative;
+  }
+  .countdown{
+    display:flex;
+    gap:14px;
+    position:relative;
+  }
+  .countdown .unit{
+    text-align:center;
+    min-width:52px;
+  }
+  .countdown .num{
+    font-family:ui-serif,"Songti TC","PMingLiU",serif;
+    font-size:34px;
+    font-variant-numeric:tabular-nums;
+    line-height:1;
+  }
+  .countdown .u{
+    font-size:11px;
+    color:#B9C0BB;
+    margin-top:4px;
+  }
+  .hero .tz-note{
+    margin-top:16px;
+    font-size:12px;
+    color:#AEB6B0;
+  }
+
+  /* ---- section heading ---- */
+  section{margin-bottom:36px;}
+  .sec-head{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .sec-head h2{font-size:17px;}
+  .sec-head .sub{font-size:12px;color:var(--ink-soft);}
+
+  /* ---- map ---- */
+  .map-card{
+    background:var(--bg-card);
+    border-radius:var(--radius);
+    padding:16px;
+    box-shadow:var(--shadow);
+    border:1px solid var(--line);
+  }
+  .map-card svg{width:100%;height:auto;display:block;}
+  .map-legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-top:12px;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .map-legend span{display:inline-flex;align-items:center;gap:6px;}
+  .swatch{width:14px;height:3px;border-radius:2px;display:inline-block;}
+
+  /* ---- booking cards ---- */
+  .booking{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px 18px;
+    margin-bottom:12px;
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  .booking + .booking{margin-top:12px;}
+  .booking .kind{
+    font-size:11px;
+    color:var(--ink-soft);
+    margin-bottom:4px;
+  }
+  .booking .title{
+    font-size:16px;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .booking .row{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    font-size:13.5px;
+    padding:5px 0;
+    border-top:1px dashed var(--line);
+  }
+  .booking .row:first-of-type{border-top:none;}
+  .booking .row .k{color:var(--ink-soft);white-space:nowrap;}
+  .booking .row .v{text-align:right;}
+  .booking .row .v a{text-decoration:none;border-bottom:1px solid currentColor;}
+
+  /* ---- itinerary ---- */
+  .day{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    margin-bottom:14px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .day-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 18px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .day-dot{
+    width:10px;height:10px;border-radius:50%;flex:none;
+  }
+  .day-date{font-size:15px;font-weight:600;min-width:78px;}
+  .day-theme{font-size:13px;color:var(--ink-soft);flex:1;}
+  .day-caret{font-size:12px;color:var(--ink-soft);transition:transform .2s ease;}
+  .day.open .day-caret{transform:rotate(90deg);}
+  .day-body{
+    display:none;
+    padding:0 18px 16px;
+  }
+  .day.open .day-body{display:block;}
+  .stop{
+    display:flex;
+    gap:12px;
+    padding:8px 0;
+    border-top:1px solid var(--line);
+    font-size:13.5px;
+  }
+  .stop:first-child{border-top:none;}
+  .stop .time{
+    min-width:48px;
+    color:var(--ink-soft);
+    font-variant-numeric:tabular-nums;
+    padding-top:1px;
+  }
+  .stop .content a{text-decoration:none;border-bottom:1px solid currentColor;}
+  .stop .note{display:block;color:var(--ink-soft);font-size:12px;margin-top:2px;}
+  .badge{
+    display:inline-block;
+    font-size:11px;
+    padding:1px 7px;
+    border-radius:20px;
+    margin-left:6px;
+    vertical-align:1px;
+  }
+  .badge.tbd{background:rgba(138,130,114,.18);color:var(--mist);}
+  .badge.warn{background:rgba(232,96,46,.14);color:var(--sunrise);}
+  .route-actions{
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px solid var(--line);
+  }
+  .btn-nav{
+    display:inline-block;
+    font-size:13px;
+    padding:8px 14px;
+    border-radius:20px;
+    background:var(--teal);
+    color:#fff;
+    text-decoration:none;
+  }
+  .risk-note{
+    margin-top:10px;
+    font-size:12.5px;
+    color:var(--sunrise);
+    background:rgba(232,96,46,.08);
+    border-radius:8px;
+    padding:8px 10px;
+  }
+
+  /* ---- todo ---- */
+  .todo-list{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:6px 18px;
+    box-shadow:var(--shadow);
+  }
+  .todo-list li{
+    padding:11px 0;
+    border-top:1px solid var(--line);
+    font-size:14px;
+  }
+  .todo-list li:first-child{border-top:none;}
+  .todo-list{list-style:none;margin:0;}
+
+  /* ---- tips ---- */
+  .tips{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:6px 18px;
+    box-shadow:var(--shadow);
+  }
+  .tips ul{margin:0;padding:0;list-style:none;}
+  .tips li{
+    padding:11px 0;
+    border-top:1px solid var(--line);
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .tips li:first-child{border-top:none;}
+  .tips li b{color:var(--ink);font-weight:600;}
+
+  footer{
+    text-align:center;
+    font-size:12px;
+    color:var(--ink-soft);
+    padding-top:10px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="trip-title">
+    <div class="en">TAIWAN · 2026.10.21 – 10.28 · 2 人</div>
+    <h1>花莲・台东・台南 7 日</h1>
+  </div>
+
+  <!-- 此刻关注 -->
+  <div class="hero">
+    <div class="label">此刻关注</div>
+    <div class="event-name" id="event-name">加载中…</div>
+    <div class="countdown" id="countdown">
+      <div class="unit"><div class="num" id="cd-d">--</div><div class="u">天</div></div>
+      <div class="unit"><div class="num" id="cd-h">--</div><div class="u">时</div></div>
+      <div class="unit"><div class="num" id="cd-m">--</div><div class="u">分</div></div>
+      <div class="unit"><div class="num" id="cd-s">--</div><div class="u">秒</div></div>
+    </div>
+    <div class="tz-note">所有时间均为台湾/新加坡当地时间（UTC+8）</div>
+  </div>
+
+  <!-- 总览地图 -->
+  <section>
+    <div class="sec-head"><h2>行程总览</h2><span class="sub">花莲 → 台东 → 台南</span></div>
+    <div class="map-card">
+      <svg viewBox="0 0 640 520" xmlns="http://www.w3.org/2000/svg">
+        <!-- base coastline, hand-drawn feel -->
+        <path d="M120 40 C 160 90, 100 140, 150 190 C 200 240, 140 280, 190 330 C 230 370, 190 410, 230 460 C 250 480, 300 490, 330 480"
+              fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="1 6" opacity="0.25"/>
+
+        <!-- day1 loop: 花莲 七星潭 太鲁阁 清水断崖 -->
+        <path d="M150 95 C 190 70, 230 75, 245 100 C 260 128, 220 150, 180 140 C 150 132, 130 112, 150 95 Z"
+              fill="none" stroke="var(--teal)" stroke-width="3" stroke-linecap="round"/>
+        <!-- day2 route: 花莲 -> 石梯坪 长滨 三仙台 都兰 -> 台东 -->
+        <path d="M150 120 C 200 160, 180 210, 230 250 C 270 285, 250 320, 290 355 C 320 380, 300 410, 330 440"
+              fill="none" stroke="var(--sunrise)" stroke-width="3" stroke-linecap="round"/>
+        <!-- day3 loop: 台东 太麻里 金仑 多良 -->
+        <path d="M330 450 C 370 430, 400 450, 395 480 C 390 505, 350 510, 325 495 C 310 485, 315 465, 330 450 Z"
+              fill="none" stroke="var(--gold)" stroke-width="3" stroke-linecap="round"/>
+        <!-- TBD: 桃园机场 -> 花莲 -->
+        <path d="M60 20 C 90 35, 120 55, 150 90"
+              fill="none" stroke="var(--mist)" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round"/>
+        <!-- TBD: 台东 -> 台南 -->
+        <path d="M330 470 C 260 500, 180 500, 120 470"
+              fill="none" stroke="var(--mist)" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round"/>
+
+        <!-- nodes -->
+        <g font-family="ui-serif, serif" font-size="14" fill="currentColor">
+          <circle cx="60" cy="20" r="4" fill="var(--mist)"/>
+          <text x="72" y="16">桃園機場</text>
+          <text x="72" y="30" font-size="10.5" fill="var(--mist)">10/21 05:45 抵達</text>
+
+          <circle cx="150" cy="95" r="7" fill="var(--teal)"/>
+          <text x="165" y="92" font-weight="600">花蓮</text>
+          <text x="165" y="107" font-size="10.5" fill="var(--mist)">住 2 晚・10/21–23</text>
+
+          <circle cx="330" cy="450" r="7" fill="var(--gold)"/>
+          <text x="345" y="447" font-weight="600">台東</text>
+          <text x="345" y="462" font-size="10.5" fill="var(--mist)">住 2 晚・10/23–25</text>
+
+          <circle cx="120" cy="470" r="7" fill="var(--mist)"/>
+          <text x="20" y="490" font-weight="600">台南</text>
+          <text x="20" y="503" font-size="10.5" fill="var(--mist)">住 3 晚・10/25–28（行程待定）</text>
+        </g>
+      </svg>
+      <div class="map-legend">
+        <span><i class="swatch" style="background:var(--teal)"></i>10/22 北线山海</span>
+        <span><i class="swatch" style="background:var(--sunrise)"></i>10/23 东海岸公路</span>
+        <span><i class="swatch" style="background:var(--gold)"></i>10/24 南回海岸</span>
+        <span><i class="swatch" style="background:var(--mist);opacity:.6"></i>交通待订</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 已确认预订 -->
+  <section>
+    <div class="sec-head"><h2>已确认预订</h2></div>
+
+    <div class="booking">
+      <div class="kind">机票 · 酷航 Scoot</div>
+      <div class="title">新加坡 ⇄ 台北</div>
+      <div class="row"><span class="k">去程 TR866</span><span class="v">10/21（三）01:00 SIN → 05:45 TPE T1</span></div>
+      <div class="row"><span class="k">回程 TR899</span><span class="v">10/28（三）16:15 TPE T1 → 20:55 SIN</span></div>
+    </div>
+
+    <div class="booking">
+      <div class="kind">租车 · Chailease 豐田 Yaris 或同级</div>
+      <div class="title">花莲取车 → 台东还车（异地还车）</div>
+      <div class="row"><span class="k">取车</span><span class="v">10/22（四）08:30・<a href="https://www.google.com/maps/search/?api=1&query=%E8%8A%B1%E8%93%AE%E7%B8%A3%E8%8A%B1%E8%93%AE%E5%B8%82%E5%9C%8B%E8%81%AF%E4%B8%80%E8%B7%AF41%E8%99%9F" target="_blank" rel="noopener">花蓮市國聯一路41號</a></span></div>
+      <div class="row"><span class="k">还车</span><span class="v">10/25（日）08:30・<a href="https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E6%9D%B1%E7%B8%A3%E5%8F%B0%E6%9D%B1%E5%B8%82%E6%96%B0%E7%AB%99%E8%B7%AF247%E8%99%9F" target="_blank" rel="noopener">台東市新站路247號</a></span></div>
+      <div class="row"><span class="k">备注</span><span class="v">里程限制 1,200km／租期，同油量取还</span></div>
+    </div>
+
+    <div class="booking">
+      <div class="kind">住宿 1 · 10/21–10/23（2 晚）</div>
+      <div class="title">花蓮賴床行旅</div>
+      <div class="row"><span class="k">地址</span><span class="v"><a href="https://www.google.com/maps/search/?api=1&query=%E8%8A%B1%E8%93%AE%E8%87%AA%E5%BC%B7%E8%A1%9713%E4%B9%8B1%E8%99%9F" target="_blank" rel="noopener">花蓮縣自強街13之1號</a></span></div>
+      <div class="row"><span class="k">电话</span><span class="v"><a href="tel:+886921101010">+886-921-101-010</a></span></div>
+      <div class="row"><span class="k">入住/退房</span><span class="v">15:00 / 11:00</span></div>
+    </div>
+
+    <div class="booking">
+      <div class="kind">住宿 2 · 10/23–10/25（2 晚）· Airbnb</div>
+      <div class="title">Room in Taitung City（房东：建義）</div>
+      <div class="row"><span class="k">地址</span><span class="v"><a href="https://www.google.com/maps/search/?api=1&query=No.359%2C+Xinsheng+Road%2C+Taitung" target="_blank" rel="noopener">No.359, Xinsheng Road, Taitung</a></span></div>
+      <div class="row"><span class="k">入住/退房</span><span class="v">15:00 / 11:00</span></div>
+    </div>
+
+    <div class="booking">
+      <div class="kind">住宿 3 · 10/25–10/28（3 晚）</div>
+      <div class="title">天下南隅</div>
+      <div class="row"><span class="k">地址</span><span class="v"><a href="https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8D%97%E5%B8%82%E6%88%90%E5%8A%9F%E8%B7%AF202%E8%99%9F" target="_blank" rel="noopener">台南市成功路202號</a></span></div>
+      <div class="row"><span class="k">电话</span><span class="v"><a href="tel:+886622290271">+886-6-229-0271</a></span></div>
+      <div class="row"><span class="k">入住/退房</span><span class="v">15:00 / 11:00</span></div>
+    </div>
+  </section>
+
+  <!-- 逐日行程 -->
+  <section>
+    <div class="sec-head"><h2>逐日行程</h2><span class="sub">点击展开路线与导航</span></div>
+
+    <!-- 10/21 -->
+    <div class="day">
+      <div class="day-head" onclick="toggleDay(this)">
+        <span class="day-dot" style="background:var(--mist)"></span>
+        <span class="day-date">10/21 三</span>
+        <span class="day-theme">出发日</span>
+        <span class="day-caret">▸</span>
+      </div>
+      <div class="day-body">
+        <div class="stop"><div class="time">01:00</div><div class="content">新加坡樟宜机场 T1 起飞 <b>TR866</b></div></div>
+        <div class="stop"><div class="time">05:45</div><div class="content">抵达 <a href="https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E7%81%A3%E6%A1%83%E5%9C%92%E5%9C%8B%E9%9A%9B%E6%A9%9F%E5%A0%B4T1" target="_blank" rel="noopener">桃園國際機場 T1</a></div></div>
+        <div class="stop"><div class="time">--:--</div><div class="content">桃園機場 → 花蓮<span class="badge tbd">交通待订</span></div></div>
+        <div class="stop"><div class="time">15:00</div><div class="content">入住 <a href="https://www.google.com/maps/search/?api=1&query=%E8%8A%B1%E8%93%AE%E8%87%AA%E5%BC%B7%E8%A1%9713%E4%B9%8B1%E8%99%9F" target="_blank" rel="noopener">花蓮賴床行旅</a></div></div>
+      </div>
+    </div>
+
+    <!-- 10/22 -->
+    <div class="day">
+      <div class="day-head" onclick="toggleDay(this)">
+        <span class="day-dot" style="background:var(--teal)"></span>
+        <span class="day-date">10/22 四</span>
+        <span class="day-theme">北线山海</span>
+        <span class="day-caret">▸</span>
+      </div>
+      <div class="day-body">
+        <div class="stop"><div class="time">08:30</div><div class="content">花蓮取车（Chailease）</div></div>
+        <div class="stop"><div class="time">白天</div><div class="content"><a href="https://www.google.com/maps/search/?api=1&query=%E4%B8%83%E6%98%9F%E6%BD%AD%2C%E8%8A%B1%E8%93%AE" target="_blank" rel="noopener">七星潭</a> → <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%AA%E9%AD%AF%E9%96%A3%E5%9C%8B%E5%AE%B6%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">太魯閣開放區</a> → <a href="https://www.google.com/maps/search/?api=1&query=%E6%B8%85%E6%B0%B4%E6%96%B7%E5%B4%96" target="_blank" rel="noopener">清水斷崖</a></div></div>
+        <div class="stop"><div class="time">晚上</div><div class="content">返回花蓮住宿</div></div>
+        <div class="route-actions">
+          <a class="btn-nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=%E8%8A%B1%E8%93%AE%E5%B8%82&destination=%E8%8A%B1%E8%93%AE%E5%B8%82&waypoints=%E4%B8%83%E6%98%9F%E6%BD%AD%2C%E8%8A%B1%E8%93%AE%7C%E5%A4%AA%E9%AD%AF%E9%96%A3%E5%9C%8B%E5%AE%B6%E5%85%AC%E5%9C%92%7C%E6%B8%85%E6%B0%B4%E6%96%B7%E5%B4%96&travelmode=driving">一键导航全天路线</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10/23 -->
+    <div class="day">
+      <div class="day-head" onclick="toggleDay(this)">
+        <span class="day-dot" style="background:var(--sunrise)"></span>
+        <span class="day-date">10/23 五</span>
+        <span class="day-theme">东海岸公路<span class="badge warn">时间偏紧</span></span>
+        <span class="day-caret">▸</span>
+      </div>
+      <div class="day-body">
+        <div class="stop"><div class="time">11:00</div><div class="content">花蓮退房</div></div>
+        <div class="stop"><div class="time">路上</div><div class="content"><a href="https://www.google.com/maps/search/?api=1&query=%E7%9F%B3%E6%A2%AF%E5%9D%AA" target="_blank" rel="noopener">石梯坪</a> → <a href="https://www.google.com/maps/search/?api=1&query=%E9%95%B7%E6%BF%B1%2C%E5%8F%B0%E6%9D%B1" target="_blank" rel="noopener">長濱</a> → <a href="https://www.google.com/maps/search/?api=1&query=%E4%B8%89%E4%BB%99%E5%8F%B0" target="_blank" rel="noopener">三仙台/成功</a> → <a href="https://www.google.com/maps/search/?api=1&query=%E9%83%BD%E8%98%AD%2C%E5%8F%B0%E6%9D%B1" target="_blank" rel="noopener">都蘭</a></div></div>
+        <div class="stop"><div class="time">15:00</div><div class="content">入住台東民宿</div></div>
+        <div class="risk-note">这段路程约160公里+4个停留点，不停车也要3.5小时，退房到入住只有4小时，大概率赶不上15:00——需要精简停留点，或提前跟房东说会晚到。</div>
+        <div class="route-actions">
+          <a class="btn-nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=%E8%8A%B1%E8%93%AE%E5%B8%82&destination=%E5%8F%B0%E6%9D%B1%E5%B8%82&waypoints=%E7%9F%B3%E6%A2%AF%E5%9D%AA%7C%E9%95%B7%E6%BF%B1%2C%E5%8F%B0%E6%9D%B1%7C%E4%B8%89%E4%BB%99%E5%8F%B0%7C%E9%83%BD%E8%98%AD%2C%E5%8F%B0%E6%9D%B1&travelmode=driving">一键导航全天路线</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10/24 -->
+    <div class="day">
+      <div class="day-head" onclick="toggleDay(this)">
+        <span class="day-dot" style="background:var(--gold)"></span>
+        <span class="day-date">10/24 六</span>
+        <span class="day-theme">南回海岸</span>
+        <span class="day-caret">▸</span>
+      </div>
+      <div class="day-body">
+        <div class="stop"><div class="time">白天</div><div class="content">台東出發 → <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%AA%E9%BA%BB%E9%87%8C%2C%E5%8F%B0%E6%9D%B1" target="_blank" rel="noopener">太麻里</a> → <a href="https://www.google.com/maps/search/?api=1&query=%E9%87%91%E5%B4%99%2C%E5%8F%B0%E6%9D%B1" target="_blank" rel="noopener">金崙</a> → <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%9A%E8%89%AF%E8%BB%8A%E7%AB%99" target="_blank" rel="noopener">多良車站</a></div></div>
+        <div class="stop"><div class="time">晚上</div><div class="content">返回台東住宿</div></div>
+        <div class="route-actions">
+          <a class="btn-nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=%E5%8F%B0%E6%9D%B1%E5%B8%82&destination=%E5%8F%B0%E6%9D%B1%E5%B8%82&waypoints=%E5%A4%AA%E9%BA%BB%E9%87%8C%2C%E5%8F%B0%E6%9D%B1%7C%E9%87%91%E5%B4%99%2C%E5%8F%B0%E6%9D%B1%7C%E5%A4%9A%E8%89%AF%E8%BB%8A%E7%AB%99&travelmode=driving">一键导航全天路线</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10/25 -->
+    <div class="day">
+      <div class="day-head" onclick="toggleDay(this)">
+        <span class="day-dot" style="background:var(--mist)"></span>
+        <span class="day-date">10/25 日</span>
+        <span class="day-theme">移动日：台东 → 台南</span>
+        <span class="day-caret">▸</span>
+      </div>
+      <div class="day-body">
+        <div class="stop"><div class="time">08:30</div><div class="content">台東還車</div></div>
+        <div class="stop"><div class="time">11:00</div><div class="content">台東民宿退房</div></div>
+        <div class="stop"><div class="time">--:--</div><div class="content">台東 → 台南<span class="badge tbd">交通待订</span></div></div>
+        <div class="stop"><div class="time">15:00</div><div class="content">入住 <a href="https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8D%97%E5%B8%82%E6%88%90%E5%8A%9F%E8%B7%AF202%E8%99%9F" target="_blank" rel="noopener">天下南隅</a></div></div>
+      </div>
+    </div>
+
+    <!-- 10/26 -->
+    <div class="day">
+      <div class="day-head" onclick="toggleDay(this)">
+        <span class="day-dot" style="background:var(--mist)"></span>
+        <span class="day-date">10/26 一</span>
+        <span class="day-theme">台南<span class="badge tbd">行程待定</span></span>
+        <span class="day-caret">▸</span>
+      </div>
+      <div class="day-body">
+        <div class="stop"><div class="time">--:--</div><div class="content">具体景点待你确认后补上</div></div>
+      </div>
+    </div>
+
+    <!-- 10/27 -->
+    <div class="day">
+      <div class="day-head" onclick="toggleDay(this)">
+        <span class="day-dot" style="background:var(--mist)"></span>
+        <span class="day-date">10/27 二</span>
+        <span class="day-theme">台南<span class="badge tbd">行程待定</span></span>
+        <span class="day-caret">▸</span>
+      </div>
+      <div class="day-body">
+        <div class="stop"><div class="time">--:--</div><div class="content">具体景点待你确认后补上</div></div>
+      </div>
+    </div>
+
+    <!-- 10/28 -->
+    <div class="day">
+      <div class="day-head" onclick="toggleDay(this)">
+        <span class="day-dot" style="background:var(--mist)"></span>
+        <span class="day-date">10/28 三</span>
+        <span class="day-theme">返程日</span>
+        <span class="day-caret">▸</span>
+      </div>
+      <div class="day-body">
+        <div class="stop"><div class="time">11:00</div><div class="content">天下南隅退房</div></div>
+        <div class="stop"><div class="time">--:--</div><div class="content">台南 → 桃園機場<span class="badge tbd">交通待订</span><span class="note">建议高铁，约1.5–2小时</span></div></div>
+        <div class="stop"><div class="time">16:15</div><div class="content">桃園機場 T1 起飞 <b>TR899</b></div></div>
+        <div class="stop"><div class="time">20:55</div><div class="content">抵达新加坡樟宜機場</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 待办清单 -->
+  <section>
+    <div class="sec-head"><h2>待办清单</h2></div>
+    <ul class="todo-list">
+      <li>取消台北圆山大饭店订单——免费取消截止 <b>2026-10-23 23:59（酒店当地时间）</b></li>
+      <li>订 10/21 桃园机场 → 花莲 的交通</li>
+      <li>解决 10/23 花莲 → 台东当日时间偏紧的问题（联系台东房东晚到，或精简沿途停留点）</li>
+      <li>订 10/25 台东 → 台南 的交通</li>
+      <li>排 10/26、10/27 台南逐日行程</li>
+      <li>出发前 1–2 周复查太鲁阁最新开放状况（官网）</li>
+    </ul>
+  </section>
+
+  <!-- 实用贴士 -->
+  <section>
+    <div class="sec-head"><h2>实用贴士</h2></div>
+    <div class="tips">
+      <ul>
+        <li><b>时区：</b>新加坡与台湾同为 UTC+8，无需调时差，登机与入住时间均按当地时间执行。</li>
+        <li><b>租车：</b>花莲取车、台东还车为异地还车，已含在费用内；里程限制 1,200 公里／租期，同油量取还。</li>
+        <li><b>太鲁阁：</b>九曲洞、燕子口目前已重新开放；若想加走锥麓古道，需提前一天 15:00 前线上申请入园。</li>
+        <li><b>布洛灣山月吊橋：</b>每月第 1、第 3 个周一为养护休桥日（如遇假日顺延）。</li>
+        <li><b>回程：</b>台南退房 11:00，航班 16:15 从桃园起飞，建议提前预留高铁＋报到时间，机场报到至少提前 120 分钟。</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>台湾 7 日・花莲・台东・台南</footer>
+</div>
+
+<script>
+  // ---------- 白天黑夜自动配色 ----------
+  function applyTheme(){
+    var h = new Date().getHours();
+    var isDay = (h >= 6 && h < 18);
+    document.documentElement.setAttribute('data-theme', isDay ? 'light' : 'dark');
+  }
+  applyTheme();
+  setInterval(applyTheme, 60000);
+
+  // ---------- 事件与倒计时（均为台湾/新加坡当地时间 UTC+8）----------
+  var events = [
+    { t:"2026-10-21T01:00:00+08:00", name:"出发：TR866 新加坡 → 台北" },
+    { t:"2026-10-21T05:45:00+08:00", name:"抵达台北桃園機場" },
+    { t:"2026-10-21T15:00:00+08:00", name:"入住 花蓮賴床行旅" },
+    { t:"2026-10-22T08:30:00+08:00", name:"花蓮取车" },
+    { t:"2026-10-23T11:00:00+08:00", name:"花蓮退房，出发东海岸公路" },
+    { t:"2026-10-23T15:00:00+08:00", name:"入住台東民宿" },
+    { t:"2026-10-25T08:30:00+08:00", name:"台東還車" },
+    { t:"2026-10-25T11:00:00+08:00", name:"台東退房，出发台南" },
+    { t:"2026-10-25T15:00:00+08:00", name:"入住 天下南隅（台南）" },
+    { t:"2026-10-28T11:00:00+08:00", name:"天下南隅退房，出发桃園機場" },
+    { t:"2026-10-28T16:15:00+08:00", name:"起飞：TR899 台北 → 新加坡" },
+    { t:"2026-10-28T20:55:00+08:00", name:"抵达新加坡樟宜機場，旅程结束" }
+  ].map(function(e){ return { time: new Date(e.t).getTime(), name: e.name }; });
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function tick(){
+    var now = Date.now();
+    var next = null;
+    for (var i=0;i<events.length;i++){
+      if (events[i].time > now){ next = events[i]; break; }
+    }
+    var nameEl = document.getElementById('event-name');
+    if (!next){
+      nameEl.textContent = "旅程已结束，欢迎回家 ✈";
+      document.getElementById('cd-d').textContent = "--";
+      document.getElementById('cd-h').textContent = "--";
+      document.getElementById('cd-m').textContent = "--";
+      document.getElementById('cd-s').textContent = "--";
+      return;
+    }
+    nameEl.textContent = next.name;
+    var diff = Math.max(0, next.time - now);
+    var s = Math.floor(diff/1000);
+    var d = Math.floor(s/86400); s -= d*86400;
+    var h = Math.floor(s/3600); s -= h*3600;
+    var m = Math.floor(s/60); s -= m*60;
+    document.getElementById('cd-d').textContent = d;
+    document.getElementById('cd-h').textContent = pad(h);
+    document.getElementById('cd-m').textContent = pad(m);
+    document.getElementById('cd-s').textContent = pad(s);
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  // ---------- 逐日展开/收起 ----------
+  function toggleDay(headEl){
+    headEl.parentElement.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
