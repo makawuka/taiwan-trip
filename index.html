@@ -10,6 +10,7 @@
     --sunrise:#E8602E;
     --teal:#1F6F78;
     --gold:#C98A2B;
+    --sea:#4C6FC4;
     --mist:#8A8272;
     --radius:14px;
   }
@@ -35,6 +36,7 @@
     --sunrise:#FF7A47;
     --teal:#57C2CB;
     --gold:#E3A83D;
+    --sea:#8FB0F2;
     --mist:#8C97A6;
   }
   *{box-sizing:border-box;}
@@ -420,6 +422,9 @@
         <!-- TBD: 桃园机场 -> 花莲 -->
         <path d="M60 20 C 90 35, 120 55, 150 90"
               fill="none" stroke="var(--mist)" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round"/>
+        <!-- 10/28 台南 -> 桃園: 高鐵636 -->
+        <path d="M120 470 C 40 420, 95 330, 50 260 C 10 190, 85 110, 60 20"
+              fill="none" stroke="var(--sea)" stroke-width="3" stroke-linecap="round"/>
         <!-- 台东 -> 台南: 台铁自強168 -->
         <path d="M330 470 C 260 500, 180 500, 120 470"
               fill="none" stroke="var(--mist)" stroke-width="2" stroke-linecap="round"/>
@@ -428,7 +433,7 @@
         <g font-family="ui-serif, serif" font-size="14" fill="currentColor">
           <circle cx="60" cy="20" r="4" fill="var(--mist)"/>
           <text x="72" y="16">桃園機場</text>
-          <text x="72" y="30" font-size="10.5" fill="var(--mist)">10/21 05:45 抵達</text>
+          <text x="72" y="30" font-size="10.5" fill="var(--mist)">10/21 抵達・10/28 返程</text>
 
           <circle cx="150" cy="95" r="7" fill="var(--teal)"/>
           <text x="165" y="92" font-weight="600">花蓮</text>
@@ -438,6 +443,7 @@
           <text x="345" y="447" font-weight="600">台東</text>
           <text x="345" y="462" font-size="10.5" fill="var(--mist)">住 2 晚・10/23–25</text>
 
+          <text x="66" y="318" font-size="10.5" fill="var(--sea)">10/28 高鐵 12:13→13:36</text>
           <circle cx="120" cy="470" r="7" fill="var(--mist)"/>
           <text x="20" y="490" font-weight="600">台南</text>
           <text x="20" y="503" font-size="10.5" fill="var(--mist)">住 3 晚・10/25–28（行程待定）</text>
@@ -449,6 +455,7 @@
         <span><i class="swatch" style="background:var(--gold)"></i>10/24 南回海岸</span>
         <span><i class="swatch" style="background:var(--mist);opacity:.6"></i>桃園機場↔台北↔花蓮：台鐵已订</span>
         <span><i class="swatch" style="background:var(--mist)"></i>台東↔台南：台鐵已订</span>
+        <span><i class="swatch" style="background:var(--sea)"></i>10/28 台南→桃園：高鐵</span>
       </div>
     </div>
   </section>
